@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, type JSX } from "react";
+import { useState, useEffect, useCallback, type ReactElement } from "react";
 import { Menu } from "lucide-react";
 import { useLocation } from "react-router";
 
@@ -18,7 +18,7 @@ function MobileMenu({
     viewsList: {
         id: string;
         name: string;
-        icon: JSX.Element;
+        icon: ReactElement;
     }[];
     isOpen: boolean;
     close: () => void;
@@ -62,7 +62,7 @@ function MobileAppbar({
     viewsList: {
         id: string;
         name: string;
-        icon: JSX.Element;
+        icon: ReactElement;
     }[];
     currentViewTitle: string;
 }) {

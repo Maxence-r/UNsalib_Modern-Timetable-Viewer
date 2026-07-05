@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode, ReactElement } from "react";
 
 import "./Layout.css";
 
@@ -8,7 +8,7 @@ function Section({
 }: {
     title?: string;
     children: ReactNode;
-}): React.JSX.Element {
+}): ReactElement {
     return (
         <div className="section">
             {title && <h3 className="title">{title}</h3>}
@@ -23,7 +23,7 @@ function Layout({
 }: {
     title?: string;
     children: ReactNode;
-}): React.JSX.Element {
+}): ReactElement {
     return (
         <div className="layout">
             {title && <h3 className="title">{title}</h3>}

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, type JSX } from "react";
+import { useState, useMemo, useEffect, type ReactElement } from "react";
 import { Info, FunnelX, Search } from "lucide-react";
 
 import { IconButton, TextButton } from "../../../../components/button/Button.js";
@@ -20,7 +20,7 @@ import { Link } from "react-router";
 import "./Home.css";
 import { Header } from "./header/Header.js";
 
-function ActionsContainer(): JSX.Element {
+function ActionsContainer(): ReactElement {
     const closePanel = usePanelStore((state) => state.close);
     // const openPanel = usePanelStore((state) => state.open);
     const setCurrentRoom = useCurrentRoomStore((state) => state.setRoom);
@@ -104,7 +104,7 @@ function ActionsContainer(): JSX.Element {
     );
 }
 
-function Home(): JSX.Element {
+function Home(): ReactElement {
     const { open: openSearchModal } = useModal("search", <SearchModal />);
 
     return (

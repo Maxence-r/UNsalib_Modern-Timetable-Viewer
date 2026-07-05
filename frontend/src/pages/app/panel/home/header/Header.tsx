@@ -1,5 +1,5 @@
 import { Info, Settings } from "lucide-react";
-import type { JSX } from "react";
+import type { ReactElement } from "react";
 
 import "./Header.css";
 import { IconButton } from "../../../../../components/button/Button.js";
@@ -9,7 +9,7 @@ import { InstallButton } from "./InstallButton.js";
 import { useModal } from "../../../../../components/modal/Modal.js";
 import { router } from "../../../../Router.js";
 
-function Header(): JSX.Element {
+function Header(): ReactElement {
     const { open: openAboutModal } = useModal("about", <AboutModal />);
 
     return (

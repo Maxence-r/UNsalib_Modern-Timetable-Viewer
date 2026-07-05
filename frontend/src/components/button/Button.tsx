@@ -1,4 +1,4 @@
-import { cloneElement } from "react";
+import { cloneElement, type ReactElement } from "react";
 
 import "./Button.css";
 
@@ -8,7 +8,7 @@ function Button({
     text,
     icon,
     iconOnly = false,
-    onClick = () => {},
+    onClick = (): void => {},
     secondary = false,
     disabled = false,
     isLoading = false,
@@ -16,13 +16,13 @@ function Button({
     className: string | undefined;
     id: string | undefined;
     text: string | undefined;
-    icon: React.JSX.Element | undefined;
+    icon: ReactElement<{ size: number; strokeWidth: number }> | undefined;
     iconOnly: boolean;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
     secondary: boolean;
     disabled: boolean;
     isLoading: boolean;
-}) {
+}): ReactElement {
     let classes = "button";
     classes += iconOnly ? " icon-button" : "";
     classes += secondary ? " secondary" : " primary";
@@ -46,19 +46,19 @@ function IconButton({
     className,
     id,
     icon,
-    onClick = () => {},
+    onClick = (): void => {},
     secondary = false,
     disabled = false,
     isLoading = false,
 }: {
     className?: string;
     id?: string;
-    icon: React.JSX.Element;
+    icon: ReactElement<{ size: number; strokeWidth: number }>;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
     secondary?: boolean;
     disabled?: boolean;
     isLoading?: boolean;
-}) {
+}): ReactElement {
     return (
         <Button
             className={className}
@@ -79,7 +79,7 @@ function TextButton({
     id,
     text,
     icon,
-    onClick = () => {},
+    onClick = (): void => {},
     secondary = false,
     disabled = false,
     isLoading = false,
@@ -87,12 +87,12 @@ function TextButton({
     className?: string;
     id?: string;
     text: string;
-    icon?: React.JSX.Element;
+    icon?: ReactElement<{ size: number; strokeWidth: number }>;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
     secondary?: boolean;
     disabled?: boolean;
     isLoading?: boolean;
-}) {
+}): ReactElement {
     return (
         <Button
             className={className}

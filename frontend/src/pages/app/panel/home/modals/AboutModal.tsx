@@ -8,9 +8,9 @@ import {
     CardHeader,
     CardContent,
 } from "../../../../../components/card/Card.js";
-import type { JSX } from "react";
+import type { ReactElement } from "react";
 
-function AboutModal(): JSX.Element {
+function AboutModal(): ReactElement {
     return (
         <div className="about">
             <div className="project">

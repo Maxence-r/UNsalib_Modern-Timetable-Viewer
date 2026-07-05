@@ -1,4 +1,4 @@
-import { cloneElement, type JSX } from "react";
+import { cloneElement, type ReactElement } from "react";
 import { LogOut } from "lucide-react";
 import { NavLink } from "react-router";
 
@@ -6,11 +6,11 @@ import "./Sidebar.css";
 
 interface Link {
     name: string;
-    icon: JSX.Element;
+    icon: ReactElement<{ size: number }>;
     path: string;
 }
 
-function Link({ name, icon, path }: Link): React.JSX.Element {
+function Link({ name, icon, path }: Link): ReactElement {
     return (
         <NavLink
             to={path}
@@ -22,7 +22,7 @@ function Link({ name, icon, path }: Link): React.JSX.Element {
     );
 }
 
-function LinksList({ actions }: { actions: Link[] }): React.JSX.Element {
+function LinksList({ actions }: { actions: Link[] }): ReactElement {
     return (
         <div className="links-list">
             {actions.map((action) => {
@@ -51,9 +51,9 @@ function Sidebar({
     viewsList: {
         id: string;
         name: string;
-        icon: JSX.Element;
+        icon: ReactElement<{ size: number }>;
     }[];
-}): React.JSX.Element {
+}): ReactElement {
     return (
         <div className={`sidebar${embedded ? "" : " shrinkable"}`}>
             <div className="branding">

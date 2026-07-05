@@ -1,8 +1,8 @@
-import type { JSX } from "react";
+import type { ReactElement } from "react";
 
 import { TextButton } from "../../../../../components/button/Button";
 
-function SafariInstallModal({ close }: { close?: () => void }): JSX.Element {
+function SafariInstallModal({ close }: { close?: () => void }): ReactElement {
     return (
         <div className="safariInstall">
             <div className="option">

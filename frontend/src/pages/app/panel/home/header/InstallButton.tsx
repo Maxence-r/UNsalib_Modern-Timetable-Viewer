@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import { Download } from "lucide-react";
 
 import { IconButton } from "../../../../../components/button/Button.js";
@@ -9,7 +9,7 @@ interface BeforeInstallPromptEvent extends Event {
     prompt: () => Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
-function InstallButton(): JSX.Element {
+function InstallButton(): ReactElement {
     const [deferredPrompt, setDeferredPrompt] =
         useState<BeforeInstallPromptEvent | null>(null);
     const { open: openSafariInstallModal } = useModal(

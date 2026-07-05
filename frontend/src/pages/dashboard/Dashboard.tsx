@@ -1,5 +1,6 @@
 // import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import type { ReactElement } from "react";
 
 // import { ApiUserAccount } from "./_utils/types";
 import { Sidebar } from "./sidebar/Sidebar";
@@ -13,7 +14,7 @@ import { useAccountStore, type Account } from "../../stores/account.store";
 import { MobileAppbar } from "./mobile-appbar/MobileAppbar";
 import { Layout } from "../../components/layout/Layout";
 
-function Dashboard(): React.JSX.Element {
+function Dashboard(): ReactElement {
     const location = useLocation().pathname;
     const currentViewId = location.split("/")[2];
     const device = useDeviceType();

@@ -1,10 +1,10 @@
-import type { JSX } from "react";
+import type { ReactElement } from "react";
 import { Outlet } from "react-router";
 
 import "./Panel.css";
 import { usePanelStore } from "../../../stores/app.store.js";
 
-function Panel(): JSX.Element {
+function Panel(): ReactElement {
     const isPanelOpened = usePanelStore((state) => state.isOpened);
 
     return (
