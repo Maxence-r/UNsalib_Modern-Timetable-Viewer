@@ -1,63 +1,77 @@
-import { useState } from "react";
+import type { ReactElement } from "react";
 
-import "../../utils/theme.css";
 import "./Switch.css";
 
-export function Switch({
+function Switch({
     className,
     id,
-    onCheck,
-    onUncheck
+    isChecked,
+    setIsChecked,
+    animationDisabled = false,
 }: {
-    className: string,
-    id: string,
-    onCheck: () => void,
-    onUncheck: () => void
-}) {
-    const [isChecked, setIsChecked] = useState(false)
-
-    const checkHandler = () => {
-        if (!isChecked) {
-            onCheck();
-        } else {
-            onUncheck();
-        }
-        setIsChecked(!isChecked);
-    };
-
+    className?: string;
+    id?: string;
+    isChecked: boolean;
+    setIsChecked: (isChecked: boolean) => void;
+    animationDisabled?: boolean;
+}): ReactElement {
     return (
-        <label className={`switch ${className}`} id={id}>
-            <input className="switch-input" type="checkbox" checked={isChecked} onChange={checkHandler} />
-            <span className="switch-slider"></span>
+        <label
+            className={
+                "switch" +
+                (animationDisabled ? "" : " animate") +
+                (className ? ` ${className}` : "")
+            }
+            id={id}
+        >
+            <input
+                className="switch-input"
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+            />
+            <span className="switch-slider" />
         </label>
     );
 }
 
-export function SwitchView({
-    title,
-    description,
-    className,
-    id,
-    onCheck,
-    onUncheck
-}: {
-    title: string,
-    description: string,
-    className: string,
-    id: string,
-    onCheck: () => void,
-    onUncheck: () => void
-}) {
-    return (
-        <div className={`switch-view ${className}`} id={id}>
-            <div className="switch-view-text">
-                <span className="switch-view-title">{title}</span>
-                {description ? <span className="switch-view-desc">{description}</span> : <></>}
-            </div>
-            <Switch onCheck={onCheck} onUncheck={onUncheck}></Switch>
-        </div>
-    );
-}
+// function SwitchView({
+//     title,
+//     description,
+//     className,
+//     id,
+//     onCheck,
+//     onUncheck,
+// }: {
+//     title: string;
+//     description: string;
+//     className: string;
+//     id: string;
+//     onCheck: () => void;
+//     onUncheck: () => void;
+// }): ReactElement {
+//     return (
+//         <div className={`switch-view ${className}`} id={id}>
+//             <div className="switch-view-text">
+//                 <span className="switch-view-title">{title}</span>
+//                 {description ? (
+//                     <span className="switch-view-desc">{description}</span>
+//                 ) : (
+//                     <></>
+//                 )}
+//             </div>
+//             <Switch onCheck={onCheck} onUncheck={onUncheck}></Switch>
+//         </div>
+//     );
+// }
 
-Switch.defaultProps = { className: "", id: "", onCheck: () => { }, onUncheck: () => { } };
-SwitchView.defaultProps = { title: "", description: "", className: "", id: "", onCheck: () => { }, onUncheck: () => { } };
+// SwitchView.defaultProps = {
+//     title: "",
+//     description: "",
+//     className: "",
+//     id: "",
+//     onCheck: () => {},
+//     onUncheck: () => {},
+// };
+
+export { Switch };

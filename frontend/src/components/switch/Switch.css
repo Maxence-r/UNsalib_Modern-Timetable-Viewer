@@ -1,64 +1,74 @@
 .switch {
     position: relative;
     display: block;
-    width: 48px;
-    height: 24px;
+    width: 44px;
+    height: 22px;
+
+    &:hover {
+        & > .switch-slider::before {
+            height: 14px;
+            width: 14px;
+            left: 4px;
+            bottom: 4px;
+        }
+    }
+
+    &.animate {
+        & > .switch-slider {
+            transition: var(--animation-duration) background-color;
+
+            &::before {
+                transition: var(--animation-duration) transform;
+            }
+        }
+    }
+
+    & > .switch-input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked + .switch-slider {
+            background-color: var(--color-accent);
+
+            &::before {
+                transform: translateX(22px);
+            }
+        }
+    }
+
+    & > .switch-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--color-neutral);
+        border-radius: 100px;
+
+        &::before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 5px;
+            bottom: 5px;
+            background-color: var(--color-on-accent);
+            border-radius: 100px;
+        }
+    }
 }
 
-.switch-input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.switch-slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--color-neutral);
-    transition: var(--animation-duration) background-color;
-    border-radius: 100px;
-}
-
-.switch-slider::before {
-    position: absolute;
-    content: "";
-    height: 12px;
-    width: 12px;
-    left: 6px;
-    bottom: 6px;
-    background-color: var(--color-on-accent);
-    transition: var(--animation-duration) transform;
-    border-radius: 100px;
-}
-
-.switch-input:checked+.switch-slider {
-    background-color: var(--color-accent);
-}
-
-.switch:hover .switch-slider::before {
-    height: 14px;
-    width: 14px;
-    left: 5px;
-    bottom: 5px;
-}
-
-.switch-input:checked+.switch-slider::before {
-    transform: translateX(24px);
-}
-
-.switch-view {
-    display: flex; 
+/* .switch-view {
+    display: flex;
     gap: 24px;
     align-items: center;
 }
 
 .switch-view-text {
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     gap: 6px;
     flex-grow: 1;
 }
@@ -71,4 +81,4 @@
 .switch-view-title {
     text-transform: uppercase;
     font-size: 16px;
-}
+} */
