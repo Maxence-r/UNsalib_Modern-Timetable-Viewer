@@ -1,4 +1,4 @@
-.tags {
+/* .tags {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -77,14 +77,12 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-/* Masquer les flèches sur Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-/* Masquer les flèches sur Internet Explorer */
 input[type=number] {
     appearance: textfield;
     -ms-appearance: textfield;
@@ -182,4 +180,91 @@ input[type=number] {
 
 .slide-selector>.slidecontainer {
     width: 150px;
+} */
+
+.modal .search {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+    gap: 24px;
+
+    & > .options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        & > .schedules-layout {
+            display: flex;
+            gap: 12px;
+            transition: gap 0.3s;
+
+            & > .selector {
+                width: 200px;
+                transition:
+                    width 0.3s,
+                    padding 0.3s,
+                    border 0.3s;
+            }
+
+            &.hide-selector {
+                gap: 0;
+
+                & > .selector {
+                    width: 0;
+                    padding-left: 0;
+                    padding-right: 0;
+                    border-left-width: 0;
+                    border-right-width: 0;
+                }
+            }
+
+            & > :not(.selector) {
+                flex-grow: 1;
+            }
+        }
+
+        & .features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            & > .section {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                & > span {
+                    font-weight: 600;
+                }
+
+                & > .slider-container {
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+
+                    & > .legend {
+                        width: 100px;
+                        font-size: 14px;
+                        color: var(--color-neutral-dark);
+                        font-weight: 500;
+
+                        & > .value {
+                            color: var(--color-on-surface);
+                        }
+                    }
+
+                    & > input {
+                        flex-grow: 1;
+                    }
+                }
+            }
+
+            & > .switch-container {
+                display: flex;
+                justify-content: space-between;
+                font-weight: 600;
+            }
+        }
+    }
 }
