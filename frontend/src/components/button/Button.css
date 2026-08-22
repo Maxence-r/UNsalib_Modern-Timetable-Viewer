@@ -6,7 +6,7 @@
     border-radius: var(--border-radius);
     cursor: pointer;
     border: none;
-    padding: 0px 18px;
+    padding: 0 18px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -15,15 +15,16 @@
     font-size: 14px;
     font-weight: 500;
     font-family: "Space Grotesk", sans-serif;
-    transition: scale var(--animation-duration);
+    clip-path: inset(0 round var(--border-radius));
+    transition: clip-path 0.1s;
 }
 
 .button:disabled {
     cursor: not-allowed;
 }
 
-.button:active {
-    scale: 0.98;
+.button:not(:disabled):active {
+    clip-path: inset(1px round calc(var(--border-radius) - 1px));
 }
 
 .button:has(svg) {
@@ -34,7 +35,7 @@
     padding: 0px 14px;
 }
 
-.button.loading>* {
+.button.loading > * {
     visibility: hidden;
 }
 

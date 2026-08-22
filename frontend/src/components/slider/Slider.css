@@ -16,8 +16,7 @@
     }
 
     &:hover::-webkit-slider-thumb {
-        height: 18px;
-        width: 18px;
+        background: var(--color-accent-dark);
     }
 
     &::-moz-range-thumb {
@@ -31,7 +30,6 @@
     }
 
     &:hover::-moz-range-thumb {
-        height: 18px;
-        width: 18px;
+        background: var(--color-accent-dark);
     }
 }
