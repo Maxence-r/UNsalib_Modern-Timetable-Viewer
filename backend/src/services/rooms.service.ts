@@ -21,7 +21,7 @@ class RoomsService {
 
     async isReviewed(roomId: string): Promise<boolean> {
         const room = await Room.findOne({ _id: roomId });
-        return !!(room && room.reviewed); 
+        return !!(room && room.reviewed);
     }
 
     // **********************************************************
@@ -114,7 +114,6 @@ class RoomsService {
     ): Promise<void> {
         const existingRoom = await Room.exists({
             _id: id,
-            buildingId: buildingId,
         });
         if (!existingRoom) {
             // Add the room if not found
@@ -218,7 +217,7 @@ class RoomsService {
     async getRoomsByBuilding(
         buildingId: string,
     ): Promise<RoomSchemaProperties[]> {
-        return await Room.find({ buildingId }).lean();
+        return await Room.find({ buildingId, reviewed: true }).lean();
     }
 
     /**

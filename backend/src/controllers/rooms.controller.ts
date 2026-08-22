@@ -6,8 +6,8 @@ import { roomsService } from "../services/rooms.service.js";
 import { buildingsService } from "../services/buildings.service.js";
 import { groupsService } from "../services/groups.service.js";
 import { coursesService } from "../services/courses.service.js";
-import { getWeekInfos, getWeeksNumber } from "../utils/date.js";
-import { hexToRgb, isLightColor, rgbToHex, blend } from "../utils/color.js";
+import { getWeekInfos } from "../utils/date.js";
+import { isLightColor, blendColors, palette } from "../utils/color.js";
 import { RoomSchemaProperties } from "models/room.model.js";
 import { ApiError } from "middlewares/error.middleware.js";
 
@@ -143,30 +143,23 @@ class RoomsController {
             );
 
             // Formatting the response
-            const formattedResponse = result.map((doc) => {
-                // let onColor = "#ffffff";
-                // if (doc.color) {
-                //     const bgColor = hexToRgb(doc.color);
-                //     const blackMask = { r: 0, g: 0, b: 0 };
-                //     const whiteMask = { r: 255, g: 255, b: 255 };
-
-                //     if (isLightColor(bgColor)) {
-                //         onColor = rgbToHex(blend(bgColor, blackMask, 0.1));
-                //     } else {
-                //         onColor = rgbToHex(blend(bgColor, whiteMask, 0.1));
-                //     }
-                // }
+            const formattedResponse = result.map((c) => {
+                const color = palette[c.colorId as keyof typeof palette];
+                const accessibleOnColor = isLightColor(color)
+                    ? blendColors(color, "#000000", 0.1)
+                    : blendColors(color, "#ffffff", 0.1);
 
                 return {
-                    courseId: doc._id,
-                    start: doc.start,
-                    end: doc.end,
-                    category: doc.category,
-                    teachers: doc.teachers,
-                    modules: doc.modules,
-                    groups: doc.groupIds,
-                    // color: doc.color,
-                    // onColor: onColor,
+                    courseId: c._id,
+                    start: c.start,
+                    end: c.end,
+                    category: c.category,
+                    teachers: c.teachers,
+                    modules: c.modules,
+                    groups: c.groupIds,
+                    color,
+                    onColor: "#ffffff",
+                    accessibleOnColor,
                 };
             });
 

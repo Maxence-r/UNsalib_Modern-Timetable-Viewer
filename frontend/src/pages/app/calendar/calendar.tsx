@@ -21,11 +21,16 @@ import { Grid } from "./grid/Grid.js";
 import { useApi } from "../../../utils/hooks/api.hook.js";
 import { getRoomTimetable } from "../../../api/timetables.api.js";
 import { useToast } from "../../../components/toast/Toast.js";
+import type { ApiDataTimetable } from "../../../utils/types/api.type.js";
+import { getCurrentWeekNumber } from "../../../utils/date.js";
 
-function incrementReducer(
+function weekNumberReducer(
     state: { value: number; previous: number },
     action: "increase" | "decrease" | "reset-previous" | "reset",
-) {
+): {
+    previous: number;
+    value: number;
+} {
     switch (action) {
         case "increase":
             return {
@@ -47,8 +52,8 @@ function incrementReducer(
 
         case "reset":
             return {
-                previous: 0,
-                value: 0,
+                previous: getCurrentWeekNumber(),
+                value: getCurrentWeekNumber(),
             };
 
         default:
@@ -95,9 +100,9 @@ function Calendar() {
     // const [timetableUrl, setTimetableUrl] = useState<string>("");
     const currentRoom = useCurrentRoomStore((state) => state.room);
 
-    const [increment, incrementDispatch] = useReducer(incrementReducer, {
-        value: 0,
-        previous: 0,
+    const [weekNumber, weekNumberDispatch] = useReducer(weekNumberReducer, {
+        value: getCurrentWeekNumber(),
+        previous: getCurrentWeekNumber(),
     });
     // const [isTimetableLoading, setTimetableLoadState] = useState(false);
     // const [hourIndicatorValue, setHourIndicatorValue] = useState(
@@ -128,9 +133,9 @@ function Calendar() {
         isLoading,
         data: courses,
         error,
-    } = useApi(
-        () => getRoomTimetable(increment.value, currentRoom?.id),
-        [currentRoom?.id, increment.value],
+    } = useApi<ApiDataTimetable | null>(
+        currentRoom ? () => getRoomTimetable(currentRoom.id, weekNumber.value) : () => null,
+        [currentRoom?.id, weekNumber.value],
     );
 
     const { open: openToast } = useToast();
@@ -149,11 +154,11 @@ function Calendar() {
                 </div>
             )}
             <ActionBar
-                incrementDispatch={incrementDispatch}
+                weekNumberDispatch={weekNumberDispatch}
                 currentRoom={currentRoom?.name}
                 weekNumber={courses ? courses.weekInfos.number : null}
                 weekStartDate={
-                    courses ? new Date(courses.weekInfos.number) : null
+                    courses ? new Date(courses.weekInfos.start) : null
                 }
             />
             <Grid

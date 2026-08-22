@@ -22,19 +22,16 @@ interface ApiDataRoom {
 // Endpoint: /rooms/timetable
 
 interface ApiDataCourse {
+    courseId: string;
+    start: string;
+    end: string;
     category: string;
+    teachers: string[];
+    modules: [];
+    groups: string[];
     color: string;
     onColor: string;
-    courseId: string;
-    duration: number;
-    end: string;
-    groups: string[];
-    modules: string[];
-    notes: string;
-    overflow: number;
-    roomId: string[];
-    start: string;
-    teachers: string[];
+    accessibleOnColor: string;
 }
 
 interface ApiDataTimetable {
@@ -93,5 +90,5 @@ export type {
     ApiDataTimetable,
     ApiDataCourse,
     ApiDataLogin,
-    ApiDataRefreshToken
+    ApiDataRefreshToken,
 };
