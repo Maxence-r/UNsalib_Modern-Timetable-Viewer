@@ -1,9 +1,11 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode, useInsertionEffect } from "react";
 
-import { useColorScheme } from "./hooks/colorScheme.hook";
-import { THEME } from "./constants";
+import type { Theme, ThemeKey } from "./types/theme.type";
+import { useThemeStore } from "../stores/theme.store";
 
-function getKebabProperty(category: string, property: string) {
+type CSSVariable = `--${string}`;
+
+function getKebabProperty(category: string, property: string): CSSVariable {
     const kebabCategory = category.replace(
         /[A-Z]/g,
         (letter) => `-${letter.toLowerCase()}`,
@@ -16,44 +18,30 @@ function getKebabProperty(category: string, property: string) {
     return `--${kebabCategory}-${kebabProperty}`;
 }
 
-function getCssTheme(isLight: boolean) {
-    const cssStyle: { [key: string]: string } = {};
+function getCssTheme(theme: Theme): string {
+    const cssStyle: `--${string}: ${string}`[] = [];
 
-    Object.keys(THEME).forEach((category) => {
-        Object.keys(THEME[category]).forEach((property) => {
-            if (typeof THEME[category][property] === "string") {
-                cssStyle[getKebabProperty(category, property)] =
-                    THEME[category][property];
-            } else {
-                if (isLight) {
-                    cssStyle[getKebabProperty(category, property)] =
-                        THEME[category][property].light;
-                } else {
-                    cssStyle[getKebabProperty(category, property)] =
-                        THEME[category][property].dark;
-                }
-            }
-        });
-    });
+    for (const colorName of Object.keys(theme)) {
+        cssStyle.push(
+            `${getKebabProperty("color", colorName)}: ${theme[colorName as ThemeKey]}`,
+        );
+    }
 
-    return cssStyle;
+    return cssStyle.join("; ");
 }
 
-function ThemeProvider({ children }: { children: ReactNode }) {
-    const colorScheme = useColorScheme();
-    const [style, setStyle] = useState<{ [key: string]: string }>(
-        getCssTheme(colorScheme === "light"),
-    );
+function ThemeProvider({
+    children,
+}: {
+    children: ReactNode | ReactNode[];
+}): ReactNode | ReactNode[] {
+    const theme = useThemeStore((s) => s.theme);
 
-    useEffect(() => {
-        setStyle(getCssTheme(colorScheme === "light"));
-    }, [colorScheme]);
+    useInsertionEffect(() => {
+        document.documentElement.style.cssText = getCssTheme(theme);
+    }, [theme]);
 
-    return (
-        <div style={{ height: "inherit", width: "inherit", ...style }}>
-            {children}
-        </div>
-    );
+    return children;
 }
 
 export { ThemeProvider };
