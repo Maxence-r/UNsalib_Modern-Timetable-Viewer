@@ -11,7 +11,7 @@
         & > .content {
             margin-top: 12px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 600;
             color: var(--color-neutral-dark);
         }
     }

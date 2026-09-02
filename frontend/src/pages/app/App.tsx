@@ -19,7 +19,6 @@ function App() {
                 </p>
             </section>
             <Panel />
-            {/* <Outlet /> */}
             <Calendar />
             {/* </NavigationManager> */}
         </main>

@@ -1,4 +1,4 @@
-// import { Users, BookOpen, Smile, Link2, ArrowUpRight } from "lucide-react";
+import { Code, History } from "lucide-react";
 
 // import { VERSION_NAME, VERSION_NUMBER } from "../../../../utils/constants.js";
 import "./AboutModal.css";
@@ -36,11 +36,11 @@ function AboutModal(): ReactElement {
                     </CardContent>
                 </Card>
                 <Card className="version">
-                    <CardHeader text='v3.0 "Louisa"' />
+                    <CardHeader text='v3.0 "Louisa"' icon={<History />}  />
                     <CardContent>Historique des versions</CardContent>
                 </Card>
                 <Card className="code">
-                    <CardHeader text="Code source" />
+                    <CardHeader text="Code source" icon={<Code />} />
                     <CardContent>Github</CardContent>
                 </Card>
             </div>

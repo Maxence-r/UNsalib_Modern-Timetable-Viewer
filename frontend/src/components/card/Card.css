@@ -20,7 +20,11 @@
     }
 
     & > .header {
-        & h3 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & > h3 {
             margin-block: 0px;
             font-family: "Cal Sans", sans-serif;
             font-size: 18px;
